@@ -1,0 +1,17 @@
+# Deploy on Render: New → Blueprint → choose this repo.
+services:
+  - type: web
+    name: steakz-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SEED_PASSWORD
+        value: Steakz@2026
+      - key: CORS_ORIGIN
+        value: https://YOUR-FRONTEND.netlify.app

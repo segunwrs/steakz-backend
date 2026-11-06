@@ -1,0 +1,239 @@
+newman
+
+Steakz MIS API
+
+❏ 1. Auth
+↳ Health check
+  GET http://localhost:4000/api/health [200 OK, 388B, 29ms]
+  ✓  Status is 200
+
+↳ Login as Admin
+  POST http://localhost:4000/api/auth/login [200 OK, 703B, 128ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login as HQ Manager
+  POST http://localhost:4000/api/auth/login [200 OK, 715B, 87ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login as Branch Manager (Manchester)
+  POST http://localhost:4000/api/auth/login [200 OK, 746B, 84ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login as Chef (Manchester)
+  POST http://localhost:4000/api/auth/login [200 OK, 718B, 83ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login as Cashier (Manchester)
+  POST http://localhost:4000/api/auth/login [200 OK, 729B, 71ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login as Driver (Manchester)
+  POST http://localhost:4000/api/auth/login [200 OK, 730B, 84ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login as Customer
+  POST http://localhost:4000/api/auth/login [200 OK, 721B, 88ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login as Chef (Leeds)
+  POST http://localhost:4000/api/auth/login [200 OK, 710B, 112ms]
+  ✓  Status is 200
+  ✓  Token returned
+
+↳ Login with wrong password
+  POST http://localhost:4000/api/auth/login [401 Unauthorized, 361B, 134ms]
+  ✓  Status is 401
+
+↳ Register customer
+  POST http://localhost:4000/api/auth/register [201 Created, 739B, 89ms]
+  ✓  Status is 201
+
+↳ Who am I
+  GET http://localhost:4000/api/auth/me [200 OK, 546B, 4ms]
+  ✓  Status is 200
+  ✓  Access level 2
+
+❏ 2. Public (open area)
+↳ Branches
+  GET http://localhost:4000/api/public/branches [200 OK, 702B, 2ms]
+  ✓  Status is 200
+
+↳ Menu
+  GET http://localhost:4000/api/public/menu [200 OK, 2.42kB, 2ms]
+  ✓  Status is 200
+
+↳ Book a table (guest)
+  POST http://localhost:4000/api/public/reservations [201 Created, 366B, 4ms]
+  ✓  Status is 201
+
+❏ 3. Admin (Level 1)
+↳ System stats
+  GET http://localhost:4000/api/admin/stats [200 OK, 649B, 6ms]
+  ✓  Status is 200
+
+↳ Audit log
+  GET http://localhost:4000/api/admin/audit-logs?limit=20 [200 OK, 2.02kB, 3ms]
+  ✓  Status is 200
+
+↳ Create branch
+  POST http://localhost:4000/api/branches [201 Created, 476B, 4ms]
+  ✓  Status is 201
+
+↳ Create another admin
+  POST http://localhost:4000/api/users [201 Created, 518B, 83ms]
+  ✓  Status is 201
+
+↳ List all users
+  GET http://localhost:4000/api/users [200 OK, 5.09kB, 3ms]
+  ✓  Status is 200
+
+↳ Change a user role
+  PUT http://localhost:4000/api/users/11 [200 OK, 527B, 4ms]
+  ✓  Status is 200
+
+↳ Add menu item
+  POST http://localhost:4000/api/menu [201 Created, 444B, 6ms]
+  ✓  Status is 201
+
+❏ 4. Management (Level 2)
+↳ HQ group report
+  GET http://localhost:4000/api/reports/summary [200 OK, 4.25kB, 7ms]
+  ✓  Status is 200
+  ✓  Has branch comparison
+
+↳ Branch report (scoped)
+  GET http://localhost:4000/api/reports/summary [200 OK, 3.24kB, 4ms]
+  ✓  Status is 200
+  ✓  No other branches
+
+↳ Export sales CSV
+  GET http://localhost:4000/api/reports/sales.csv [200 OK, 27.43kB, 5ms]
+  ✓  Status is 200
+
+↳ Branch staff list
+  GET http://localhost:4000/api/users [200 OK, 1.4kB, 2ms]
+  ✓  Status is 200
+  ✓  Only Manchester
+
+↳ Hire a cashier
+  POST http://localhost:4000/api/users [201 Created, 531B, 90ms]
+  ✓  Status is 201
+
+↳ Branch inventory
+  GET http://localhost:4000/api/inventory [200 OK, 2.37kB, 4ms]
+  ✓  Status is 200
+
+↳ Low stock only (HQ)
+  GET http://localhost:4000/api/inventory?low=1 [200 OK, 1.52kB, 3ms]
+  ✓  Status is 200
+
+↳ Reservations
+  GET http://localhost:4000/api/reservations?upcoming=1 [200 OK, 1.87kB, 3ms]
+  ✓  Status is 200
+
+❏ 5. Operations (Level 3) – order flow
+↳ Cashier creates dine-in order
+  POST http://localhost:4000/api/orders [201 Created, 978B, 5ms]
+  ✓  Status is 201
+  ✓  Total from server prices
+
+↳ Chef starts cooking
+  PATCH http://localhost:4000/api/orders/1515/status [200 OK, 975B, 6ms]
+  ✓  Status is 200
+
+↳ Chef marks ready
+  PATCH http://localhost:4000/api/orders/1515/status [200 OK, 971B, 9ms]
+  ✓  Status is 200
+
+↳ Cashier takes card payment
+  PATCH http://localhost:4000/api/orders/1515/payment [200 OK, 971B, 5ms]
+  ✓  Status is 200
+
+↳ Cashier marks served
+  PATCH http://localhost:4000/api/orders/1515/status [200 OK, 975B, 5ms]
+  ✓  Status is 200
+
+↳ Kitchen queue
+  GET http://localhost:4000/api/orders?status=pending,preparing,ready [200 OK, 5.8kB, 4ms]
+  ✓  Status is 200
+
+↳ Driver deliveries
+  GET http://localhost:4000/api/orders [200 OK, 67.71kB, 15ms]
+  ✓  Status is 200
+
+↳ Chef stock count
+  PATCH http://localhost:4000/api/inventory/13 [200 OK, 453B, 5ms]
+  ✓  Status is 200
+
+↳ Customer online order
+  POST http://localhost:4000/api/orders [201 Created, 888B, 3ms]
+  ✓  Status is 201
+
+↳ Customer: my orders
+  GET http://localhost:4000/api/orders [200 OK, 72.47kB, 14ms]
+  ✓  Status is 200
+
+❏ 6. Security & isolation (negative tests)
+↳ No token → 401
+  GET http://localhost:4000/api/orders [401 Unauthorized, 357B, 2ms]
+  ✓  Status is 401
+
+↳ Customer lists users → 403
+  GET http://localhost:4000/api/users [403 Forbidden, 373B, 2ms]
+  ✓  Status is 403
+
+↳ Chef takes payment → 403
+  PATCH http://localhost:4000/api/orders/1515/payment [403 Forbidden, 373B, 5ms]
+  ✓  Status is 403
+
+↳ Branch manager creates admin → 403
+  POST http://localhost:4000/api/users [403 Forbidden, 404B, 2ms]
+  ✓  Status is 403
+
+↳ HQ deletes user → 403
+  DELETE http://localhost:4000/api/users/5 [403 Forbidden, 373B, 2ms]
+  ✓  Status is 403
+
+↳ Leeds chef opens Manchester order → 404
+  GET http://localhost:4000/api/orders/1515 [404 Not Found, 346B, 3ms]
+  ✓  Status is 404
+
+↳ Manager tries ?branch_id=3 → still own branch
+  GET http://localhost:4000/api/orders?branch_id=3 [200 OK, 75.84kB, 12ms]
+  ✓  Status is 200
+  ✓  Only branch 2
+
+↳ Invalid status jump → 400
+  PATCH http://localhost:4000/api/orders/1/status [400 Bad Request, 388B, 4ms]
+  ✓  Status is 400
+
+↳ Validation error → 400
+  POST http://localhost:4000/api/auth/register [400 Bad Request, 476B, 3ms]
+  ✓  Status is 400
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                49 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                49 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 0 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                63 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 2s                                         │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 279.18kB (approx)                         │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 27ms [min: 2ms, max: 134ms, s.d.: 39ms] │
+└────────────────────────────────────────────────────────────────┘

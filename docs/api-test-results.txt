@@ -1,0 +1,196 @@
+
+> steakz-mis-server@1.0.0 test
+> node --no-warnings --test tests/api.test.js
+
+TAP version 13
+# ◇ injected env (3) from .env
+# Seed complete. All demo accounts use the password: Steakz@2026
+# Subtest: T01 health check is public
+ok 1 - T01 health check is public
+  ---
+  duration_ms: 807.286262
+  type: 'test'
+  ...
+# Subtest: T02 wrong password is rejected with a generic message
+ok 2 - T02 wrong password is rejected with a generic message
+  ---
+  duration_ms: 90.33099
+  type: 'test'
+  ...
+# Subtest: T03 every role can log in and gets the right access level
+ok 3 - T03 every role can log in and gets the right access level
+  ---
+  duration_ms: 10.760748
+  type: 'test'
+  ...
+# Subtest: T04 protected endpoints need a token
+ok 4 - T04 protected endpoints need a token
+  ---
+  duration_ms: 6.369487
+  type: 'test'
+  ...
+# Subtest: T05 password hashes are never returned
+ok 5 - T05 password hashes are never returned
+  ---
+  duration_ms: 2.933039
+  type: 'test'
+  ...
+# Subtest: T06 customer cannot list users (403)
+ok 6 - T06 customer cannot list users (403)
+  ---
+  duration_ms: 1.971537
+  type: 'test'
+  ...
+# Subtest: T07 chef cannot take payments (403)
+ok 7 - T07 chef cannot take payments (403)
+  ---
+  duration_ms: 2.772789
+  type: 'test'
+  ...
+# Subtest: T08 HQ manager cannot delete users (403)
+ok 8 - T08 HQ manager cannot delete users (403)
+  ---
+  duration_ms: 2.438062
+  type: 'test'
+  ...
+# Subtest: T09 branch manager cannot create an admin account (403)
+ok 9 - T09 branch manager cannot create an admin account (403)
+  ---
+  duration_ms: 3.076943
+  type: 'test'
+  ...
+# Subtest: T10 audit log is admin-only
+ok 10 - T10 audit log is admin-only
+  ---
+  duration_ms: 3.870075
+  type: 'test'
+  ...
+# Subtest: T11 Manchester manager only sees Manchester orders
+ok 11 - T11 Manchester manager only sees Manchester orders
+  ---
+  duration_ms: 62.659153
+  type: 'test'
+  ...
+# Subtest: T12 Manchester manager cannot widen scope with ?branch_id=3
+ok 12 - T12 Manchester manager cannot widen scope with ?branch_id=3
+  ---
+  duration_ms: 63.778013
+  type: 'test'
+  ...
+# Subtest: T13 Leeds chef cannot open or move a Manchester order
+ok 13 - T13 Leeds chef cannot open or move a Manchester order
+  ---
+  duration_ms: 6.773525
+  type: 'test'
+  ...
+# Subtest: T14 branch reports are scoped; HQ gets branch comparison
+ok 14 - T14 branch reports are scoped; HQ gets branch comparison
+  ---
+  duration_ms: 10.36238
+  type: 'test'
+  ...
+# Subtest: T15 Manchester manager only sees Manchester staff
+ok 15 - T15 Manchester manager only sees Manchester staff
+  ---
+  duration_ms: 2.163462
+  type: 'test'
+  ...
+# Subtest: T16 cashier order total is calculated on the server (price tampering ignored)
+ok 16 - T16 cashier order total is calculated on the server (price tampering ignored)
+  ---
+  duration_ms: 2.779428
+  type: 'test'
+  ...
+# Subtest: T17 invalid status jump pending→completed is blocked
+ok 17 - T17 invalid status jump pending→completed is blocked
+  ---
+  duration_ms: 2.21651
+  type: 'test'
+  ...
+# Subtest: T18 cashier cannot do the chef's job (pending→preparing)
+ok 18 - T18 cashier cannot do the chef's job (pending→preparing)
+  ---
+  duration_ms: 2.175671
+  type: 'test'
+  ...
+# Subtest: T19 full dine-in flow: chef cooks, cashier takes payment and serves
+ok 19 - T19 full dine-in flow: chef cooks, cashier takes payment and serves
+  ---
+  duration_ms: 11.011472
+  type: 'test'
+  ...
+# Subtest: T20 delivery flow: driver picks up and delivers, cash marked paid
+ok 20 - T20 delivery flow: driver picks up and delivers, cash marked paid
+  ---
+  duration_ms: 21.680786
+  type: 'test'
+  ...
+# Subtest: T21 customer online order and can only see own orders
+ok 21 - T21 customer online order and can only see own orders
+  ---
+  duration_ms: 16.641901
+  type: 'test'
+  ...
+# Subtest: T22 admin can add a branch, create another admin, and delete a user
+ok 22 - T22 admin can add a branch, create another admin, and delete a user
+  ---
+  duration_ms: 170.906019
+  type: 'test'
+  ...
+# Subtest: T23 admin can change a role; disabled accounts lose access immediately
+ok 23 - T23 admin can change a role; disabled accounts lose access immediately
+  ---
+  duration_ms: 261.361904
+  type: 'test'
+  ...
+# Subtest: T24 branch-bound roles must have a branch
+ok 24 - T24 branch-bound roles must have a branch
+  ---
+  duration_ms: 2.762974
+  type: 'test'
+  ...
+# Subtest: T25 validation errors return 400 with field messages
+ok 25 - T25 validation errors return 400 with field messages
+  ---
+  duration_ms: 1.946941
+  type: 'test'
+  ...
+# Subtest: T26 SQL injection in search is treated as text
+ok 26 - T26 SQL injection in search is treated as text
+  ---
+  duration_ms: 1.807011
+  type: 'test'
+  ...
+# Subtest: T27 public booking in the past is rejected
+ok 27 - T27 public booking in the past is rejected
+  ---
+  duration_ms: 2.534453
+  type: 'test'
+  ...
+# Subtest: T28 chef stock count updates quantity only
+ok 28 - T28 chef stock count updates quantity only
+  ---
+  duration_ms: 4.108446
+  type: 'test'
+  ...
+# Subtest: T29 malformed JSON returns 400 not 500
+ok 29 - T29 malformed JSON returns 400 not 500
+  ---
+  duration_ms: 2.067674
+  type: 'test'
+  ...
+# Subtest: T30 CSV export works for managers
+ok 30 - T30 CSV export works for managers
+  ---
+  duration_ms: 3.459395
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1898.366025
